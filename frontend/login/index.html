@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/login">Login</a>
+        <a data-nav href="/signup">Signup</a>
+      </nav>
+    </header>
+
+    <main class="page auth-page">
+      <section class="auth-head">
+        <h1>Sign in to your account</h1>
+        <p>Or <a href="/signup">create a new account</a></p>
+      </section>
+
+      <form id="loginForm" class="simple-form auth-form" autocomplete="off">
+        <fieldset class="auth-role-group">
+          <legend>I am a</legend>
+          <div class="auth-segment" role="radiogroup" aria-label="Select account type">
+            <input id="loginIntentStudent" class="auth-segment-input" type="radio" name="intent" value="seeker" checked />
+            <label for="loginIntentStudent" class="auth-segment-btn">Student</label>
+            <input id="loginIntentOwner" class="auth-segment-input" type="radio" name="intent" value="owner" />
+            <label for="loginIntentOwner" class="auth-segment-btn">Property Owner</label>
+          </div>
+        </fieldset>
+
+        <fieldset id="loginStudentFlow" class="auth-role-group">
+          <legend>As Student, I want to</legend>
+          <label class="inline-radio">
+            <input id="loginFlowBuy" type="radio" name="preferredRoomType" value="room-only" checked />
+            Buy / Find Room
+          </label>
+          <label class="inline-radio">
+            <input id="loginFlowRoommate" type="radio" name="preferredRoomType" value="room-with-roommates" />
+            List for Roommate
+          </label>
+        </fieldset>
+
+        <label>Email address<input name="email" type="email" required /></label>
+        <label>Password<input name="password" type="password" minlength="6" required /></label>
+        <button class="btn btn-primary auth-submit" type="submit">Sign in</button>
+      </form>
+      <p class="status-text auth-status" id="loginStatus"></p>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Flat</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/list">List</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner list-hero">
+        <h1>List Your Property</h1>
+        <p>Help students find their perfect accommodation</p>
+        <div class="list-tab-wrap">
+          <button id="ownerTab" type="button" class="tab-btn active-tab">List a Flat</button>
+          <button id="roommateTab" type="button" class="tab-btn">Find Roommates</button>
+        </div>
+      </div>
+    </section>
+
+    <main class="page page-wide">
+      <form id="ownerForm" class="simple-form card list-form" autocomplete="off">
+        <div class="list-grid-2">
+          <label>Property Title *<input name="title" type="text" placeholder="e.g., Cozy 2BHK Near Delhi University" required /></label>
+          <label>Monthly Rent (₹) *<input name="rent" type="number" value="15000" required /></label>
+        </div>
+        <label>Description *<textarea name="description" rows="4" placeholder="Describe your property, nearby facilities, and what makes it special..." required></textarea></label>
+
+        <label>Property Type *</label>
+        <div class="choice-card">
+          <span><strong>Single Room Only</strong><small class="muted">Owners can list only a private single room</small></span>
+        </div>
+        <input type="hidden" name="flatType" value="room-only" />
+
+        <label>Address *<input id="ownerAddressInput" name="address" type="text" placeholder="Enter full address" required /></label>
+        <div class="list-grid-2">
+          <input name="lat" type="number" step="any" placeholder="Latitude (optional, auto-filled from map selection)" />
+          <input name="lng" type="number" step="any" placeholder="Longitude (optional, auto-filled from map selection)" />
+        </div>
+        <button id="selectLocationBtn" type="button" class="btn btn-light">📍 Select location on map</button>
+
+        <label>Amenities</label>
+        <div class="list-amenities-grid">
+          <label><input type="checkbox" name="amenities" value="WiFi" /> WiFi</label>
+          <label><input type="checkbox" name="amenities" value="Parking" /> Parking</label>
+          <label><input type="checkbox" name="amenities" value="Laundry" /> Laundry</label>
+          <label><input type="checkbox" name="amenities" value="Kitchen" /> Kitchen</label>
+          <label><input type="checkbox" name="amenities" value="Study Room" /> Study Room</label>
+          <label><input type="checkbox" name="amenities" value="Gym" /> Gym</label>
+          <label><input type="checkbox" name="amenities" value="Swimming Pool" /> Swimming Pool</label>
+          <label><input type="checkbox" name="amenities" value="Security" /> Security</label>
+          <label><input type="checkbox" name="amenities" value="Furnished" /> Furnished</label>
+          <label><input type="checkbox" name="amenities" value="Air Conditioning" /> Air Conditioning</label>
+          <label><input type="checkbox" name="amenities" value="Balcony" /> Balcony</label>
+          <label><input type="checkbox" name="amenities" value="Garden" /> Garden</label>
+        </div>
+
+        <label>Property Photos (minimum 2, you can add many more) *<input id="ownerImagesInput" name="images" type="file" accept="image/*" multiple /></label>
+        <div id="ownerExistingImages" class="chip-list"></div>
+        <p id="ownerImagesCount" class="muted">0 added</p>
+        <label>360° Photos (minimum 2, you can add many more) *<input id="ownerTourInput" name="tour360" type="file" accept="image/*" multiple /></label>
+        <div id="ownerExistingTours" class="chip-list"></div>
+        <p id="ownerTourCount" class="muted">0 added</p>
+        <label>Available From *<input name="availableFrom" type="date" required /></label>
+        <label>House Rules (Optional)<textarea rows="3" name="houseRules" placeholder="Any specific rules or preferences for tenants..."></textarea></label>
+        <label class="hidden">Owner Name<input name="ownerName" type="text" /></label>
+        <button id="ownerSubmitBtn" class="btn btn-primary list-submit" type="submit">List Property</button>
+      </form>
+
+      <form id="roommateForm" class="simple-form card list-form hidden" autocomplete="off">
+        <h2>Create Your Roommate Profile</h2>
+        <p class="muted">Help property owners find the perfect roommate match</p>
+        <div class="list-grid-3">
+          <label>Full Name *<input name="name" type="text" required /></label>
+          <label>Age *<input name="age" type="number" min="18" max="45" value="20" required /></label>
+          <label>Course/Field *<input name="course" type="text" placeholder="e.g., Computer Science" required /></label>
+        </div>
+        <label>About Me *<textarea name="bio" rows="4" placeholder="Tell potential roommates about yourself, your lifestyle, and what you're looking for..." required></textarea></label>
+
+        <label>Max Budget (₹/month) *<input name="preferredRentMax" type="number" value="15000" required /></label>
+        <label>How many students can live in this room? *<input name="maxOccupants" type="number" min="1" max="10" value="2" required /></label>
+
+        <label>Room/Flat Address *<input id="roommateAddressInput" name="address" type="text" placeholder="Enter full address" required /></label>
+        <div class="list-grid-2">
+          <input name="lat" type="number" step="any" placeholder="Latitude (optional)" />
+          <input name="lng" type="number" step="any" placeholder="Longitude (optional)" />
+        </div>
+        <button id="selectRoommateLocationBtn" type="button" class="btn btn-light">📍 Open address in map</button>
+
+        <label>Personality Profile</label>
+        <label>Cleanliness Level<input name="cleanliness" type="range" min="1" max="10" value="5" /></label>
+        <label>Social Level<input name="socialLevel" type="range" min="1" max="10" value="5" /></label>
+        <label>Study Focus<input name="studyHabits" type="range" min="1" max="10" value="5" /></label>
+
+        <label>Interests & Hobbies</label>
+        <div class="list-amenities-grid">
+          <label><input type="checkbox" name="interest" value="Reading" /> Reading</label>
+          <label><input type="checkbox" name="interest" value="Music" /> Music</label>
+          <label><input type="checkbox" name="interest" value="Sports" /> Sports</label>
+          <label><input type="checkbox" name="interest" value="Gaming" /> Gaming</label>
+          <label><input type="checkbox" name="interest" value="Cooking" /> Cooking</label>
+          <label><input type="checkbox" name="interest" value="Movies" /> Movies</label>
+          <label><input type="checkbox" name="interest" value="Fitness" /> Fitness</label>
+          <label><input type="checkbox" name="interest" value="Art" /> Art</label>
+          <label><input type="checkbox" name="interest" value="Technology" /> Technology</label>
+          <label><input type="checkbox" name="interest" value="Travel" /> Travel</label>
+          <label><input type="checkbox" name="interest" value="Photography" /> Photography</label>
+          <label><input type="checkbox" name="interest" value="Dancing" /> Dancing</label>
+        </div>
+
+        <label>Profile Photos (minimum 2 normal images) *<input id="roommateImagesInput" type="file" name="images" accept="image/*" multiple /></label>
+        <div id="roommateExistingImages" class="chip-list"></div>
+        <p id="roommateImagesCount" class="muted">0 added</p>
+        <label>Preferred Move-in Date *<input type="date" name="moveInDate" required /></label>
+        <label>360° Photos (minimum 2 panoramic images) *<input id="roommateTourInput" type="file" name="tour360" accept="image/*" multiple /></label>
+        <div id="roommateExistingTours" class="chip-list"></div>
+        <p id="roommateTourCount" class="muted">0 added</p>
+        <button id="roommateSubmitBtn" class="btn btn-secondary list-submit" type="submit">Create Profile</button>
+      </form>
+
+      <section id="ownerListingsPanel" class="card list list-form hidden">
+        <h2>Your Listed Flats</h2>
+        <div id="ownerListingsList" class="conversation-list"></div>
+      </section>
+
+      <p id="listStatus" class="status-text"></p>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/list.js"></script>
+  </body>
+</html>

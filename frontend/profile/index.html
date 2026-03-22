@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/profile">Profile</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner">
+        <h1>My Profile</h1>
+        <p id="profileIntroText">Manage your account settings and preferences</p>
+      </div>
+    </section>
+
+    <main class="page page-wide">
+      <section class="card profile-shell">
+        <div class="profile-tabs">
+          <button class="tab-btn active-tab" type="button" data-profile-tab="personal">👤 Personal Info</button>
+        </div>
+
+        <form id="profileForm" class="profile-form-grid">
+          <div id="profilePersonalPanel" class="profile-form-grid profile-wide" data-profile-panel="personal">
+            <label>Full Name<input id="profileName" name="name" type="text" /></label>
+            <label>Email<input id="profileEmail" name="email" type="email" disabled /></label>
+            <label>Phone Number<input id="profilePhone" name="phone" type="tel" placeholder="+91 9876543210" /></label>
+            <label class="profile-wide">Bio<textarea id="profileBio" name="bio" rows="5" placeholder="Tell us about yourself..."></textarea></label>
+          </div>
+
+          <div id="studentPreferenceFields" class="profile-form-grid profile-wide" data-profile-panel="personal">
+            <label>University<input id="profileUniversity" name="university" type="text" placeholder="Delhi University" /></label>
+            <label>Course<input id="profileCourse" name="course" type="text" placeholder="Computer Science" /></label>
+            <label>Year
+              <select id="profileYear" name="year">
+                <option value="">Select Year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+                <option>Graduate</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="btn btn-primary profile-submit profile-wide" type="submit">Save Profile</button>
+          <p id="profileStatus" class="status-text profile-wide"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/profile.js"></script>
+  </body>
+</html>

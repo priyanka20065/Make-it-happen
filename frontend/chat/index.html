@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="chat-page">
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/chat">Chat</a>
+        <a data-nav href="/browse">Browse</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner page-intro-row">
+        <div>
+          <h1>Messages</h1>
+          <p id="messagesSubtitle">Chat with property owners and potential roommates</p>
+        </div>
+        <div class="intro-side" id="messagesPlanMeta">
+          <p id="planLabel" class="muted">Free Plan</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="page page-wide chat-shell">
+      <section id="chatConversationList" class="conversation-list chat-list-pane"></section>
+
+      <section id="chatThreadPanel" class="card chat-thread-panel chat-thread-pane hidden">
+        <div class="chat-thread-head">
+          <h3 id="threadTitle">Conversation</h3>
+          <p id="threadRemaining" class="muted"></p>
+        </div>
+        <div id="threadMessages" class="thread-messages"></div>
+        <form class="chat-compose" id="chatForm">
+          <input type="text" id="chatInput" name="message" placeholder="Message" required />
+          <button class="btn btn-primary" id="sendBtn" type="submit">Send</button>
+        </form>
+      </section>
+
+      <p id="chatStatus" class="status-text"></p>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>

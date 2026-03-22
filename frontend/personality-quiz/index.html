@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personality Quiz</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/personality-quiz">Quiz</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner">
+        <h1>Personality Quiz</h1>
+        <p>This quiz helps AI match rooms and roommates based on your lifestyle and interests.</p>
+      </div>
+    </section>
+
+    <main class="page">
+
+      <form id="quizForm" class="simple-form">
+        <label>Cleanliness (1-10)<input name="cleanliness" type="number" min="1" max="10" value="5" /></label>
+        <label>Social Level (1-10)<input name="socialLevel" type="number" min="1" max="10" value="5" /></label>
+        <label>Study Habits (1-10)<input name="studyHabits" type="number" min="1" max="10" value="5" /></label>
+        <label>Interests (comma separated)<input name="interests" type="text" placeholder="coding, music, fitness" /></label>
+        <button class="btn btn-primary" type="submit">Run AI Matching</button>
+      </form>
+
+      <p id="quizStatus" class="status-text"></p>
+      <section id="recommendations" class="card-grid"></section>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/quiz.js"></script>
+  </body>
+</html>

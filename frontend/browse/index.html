@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Flats</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/browse/map">Map View</a>
+        <a data-nav href="/list">List</a>
+        <a data-nav href="/dashboard">Dashboard</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro">
+      <div class="page-intro-inner">
+        <h1>Browse Flats</h1>
+        <p>Find your perfect room or roommate with advanced filters and AI-style matching inputs.</p>
+      </div>
+    </section>
+
+    <main class="browse-layout">
+      <aside class="filters">
+        <h2>Filters</h2>
+        <label>Search<input id="searchInput" type="text" placeholder="Location, title, course, interests" /></label>
+        <label>
+          Room Type
+          <select id="flatType">
+            <option value="all">All</option>
+            <option value="room-only">Room Only</option>
+            <option value="room-with-roommates">Room with Roommates</option>
+          </select>
+        </label>
+        <label>Min Rent<input id="minRent" type="number" min="0" step="500" value="0" /></label>
+        <label>Max Rent<input id="maxRent" type="number" min="0" step="500" value="30000" /></label>
+        <label>Cleanliness (1-10)<input id="cleanliness" type="number" min="1" max="10" value="5" /></label>
+        <label>Social Level (1-10)<input id="socialLevel" type="number" min="1" max="10" value="5" /></label>
+        <label>Study Habits (1-10)<input id="studyHabits" type="number" min="1" max="10" value="5" /></label>
+        <label>Interest Keywords<input id="interest" type="text" placeholder="coding, gaming" /></label>
+        <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+      </aside>
+
+      <section class="results">
+        <div class="results-header"><h2>Results</h2><p id="resultCount">Loading...</p></div>
+        <div class="tab-row">
+          <button id="roomsTab" class="tab-btn active-tab" type="button">Rooms</button>
+          <button id="roommatesTab" class="tab-btn" type="button">Roommates</button>
+        </div>
+        <div id="flatGrid" class="flat-grid"></div>
+      </section>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/browse.js"></script>
+  </body>
+</html>

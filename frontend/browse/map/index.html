@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map View</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/browse/map">Map View</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner">
+        <h1>Map View</h1>
+        <p>Explore rooms on map, search by address/title, and open directions instantly.</p>
+      </div>
+    </section>
+
+    <main class="map-page page-wide">
+      <aside class="map-sidebar list">
+        <label class="map-search-label">
+          Search listings
+          <input id="mapSearch" type="text" placeholder="Search by title or location" />
+        </label>
+        <p class="muted" id="mapCount">Loading...</p>
+        <ul id="mapList" class="map-list"></ul>
+      </aside>
+
+      <section class="map-panel">
+        <div class="map-meta card">
+          <h2 id="selectedTitle">Select a listing</h2>
+          <p class="muted" id="selectedAddress">-</p>
+          <p class="muted" id="selectedRent">-</p>
+          <a id="openDirections" class="btn btn-secondary small-btn" href="#" target="_blank" rel="noreferrer">Open in Google Maps</a>
+        </div>
+        <iframe
+          id="mapFrame"
+          class="map-frame"
+          title="Map preview"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </section>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/map.js"></script>
+  </body>
+</html>

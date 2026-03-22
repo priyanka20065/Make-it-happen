@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/" class="brand">Student Flat Finder</a>
+      <nav>
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/browse">Browse</a>
+        <a data-nav href="/dashboard">Dashboard</a>
+        <a data-nav href="/chat">Chat</a>
+        <a class="btn btn-primary small-btn" href="/login">Login</a>
+        <a class="btn btn-secondary small-btn" href="/signup">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="page-intro compact-intro">
+      <div class="page-intro-inner">
+        <h1 id="welcomeTitle">Welcome back!</h1>
+        <p id="welcomeSubtitle">Manage your properties</p>
+      </div>
+    </section>
+
+    <main class="page page-wide">
+      <section class="dashboard-shell">
+        <aside class="dashboard-sidebar-col">
+          <article class="card dashboard-panel">
+            <h3>Your Activity</h3>
+            <ul class="activity-list" id="activityList"></ul>
+          </article>
+
+          <article class="card dashboard-panel">
+            <h3>Quick Actions</h3>
+            <div class="action-stack">
+              <a class="btn btn-secondary" href="/list">List Property</a>
+              <a class="btn btn-dark" href="/profile">Edit Profile</a>
+              <a class="btn btn-premium" href="/subscription">Get Premium</a>
+            </div>
+          </article>
+
+          <article class="card dashboard-panel">
+            <h3>Your Profile</h3>
+            <p><span class="muted">Account Type:</span> <strong id="profileRole">-</strong></p>
+            <p><span class="muted">Member Since:</span> <strong id="memberSince">-</strong></p>
+            <p><span class="muted">Subscription:</span> <strong id="subscriptionStatus">Free</strong></p>
+          </article>
+        </aside>
+
+        <section class="dashboard-main-col">
+          <article class="card dashboard-panel">
+            <div class="results-header">
+              <h2>AI Recommendations</h2>
+              <p class="status-text">Powered by AI Matching</p>
+            </div>
+            <p class="muted">Personalized matches based on your personality profile</p>
+            <div id="dashboardRecommendations" class="dashboard-reco-list"></div>
+          </article>
+        </section>
+      </section>
+      <p id="dashboardStatus" class="status-text"></p>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>
