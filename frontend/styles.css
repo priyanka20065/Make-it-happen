@@ -39,6 +39,18 @@ body.auth-screen {
     radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.15), transparent 50%);
 }
 
+body.route-transition .nav,
+body.route-transition .app-main {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.nav,
+.app-main {
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
