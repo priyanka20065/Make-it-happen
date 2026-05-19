@@ -5,6 +5,7 @@ const express = require("express")
 const { flats: seedFlats, roommates: seedRoommates } = require("./data/flats")
 const { uploadsDir, imageUpload, staticNoCacheOptions } = require("./config/upload")
 const { createAppContext } = require("./services/appContext")
+const { authMiddleware } = require("./services/auth")
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -14,10 +15,24 @@ app.use("/uploads", express.static(uploadsDir, staticNoCacheOptions))
 
 const appContext = createAppContext({ seedFlats, seedRoommates })
 
+const {
+  hashPassword,
+  comparePassword,
+  generateToken,
+  verifyToken,
+  getTokenFromRequest,
+} = require("./services/auth")
+
 require("./routes/api")(app, {
   ...appContext,
   imageUpload,
   crypto,
+  authMiddleware,
+  hashPassword,
+  comparePassword,
+  generateToken,
+  verifyToken,
+  getTokenFromRequest,
 })
 
 app.use((error, _req, res, next) => {

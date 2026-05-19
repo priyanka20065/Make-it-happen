@@ -60,7 +60,13 @@ module.exports = function (app, ctx) {
     persistFlatMetrics,
     deleteFlatMetrics,
     browseSubscribers,
-    chatSubscribers
+    chatSubscribers,
+    hashPassword,
+    comparePassword,
+    generateToken,
+    verifyToken,
+    getTokenFromRequest,
+    authMiddleware,
   } = ctx;
 
   app.get("/api/health", (_req, res) => {
@@ -131,11 +137,20 @@ module.exports = function (app, ctx) {
       return
     }
 
+    // Hash password with bcrypt
+    let hashedPassword
+    try {
+      hashedPassword = await hashPassword(password)
+    } catch (error) {
+      res.status(500).json({ message: "Error hashing password" })
+      return
+    }
+
     const user = {
       id: makeId("usr"),
       name: String(name).trim(),
       email: normalizedEmail,
-      password: String(password),
+      password: hashedPassword,
       role: intent === "owner" ? "owner" : "roommate",
       intent,
       preferredRoomType: preferredRoomType || null,
@@ -158,6 +173,7 @@ module.exports = function (app, ctx) {
         active: false,
         activatedAt: null,
       },
+      createdAt: new Date().toISOString(),
     }
 
     state.users.set(user.id, user)
@@ -184,8 +200,12 @@ module.exports = function (app, ctx) {
       html: `<p>Hi <strong>${user.name}</strong>,</p><p>Welcome to <strong>Student Flat Finder</strong>. Your account is ready as <strong>${welcomeUserType}</strong>. You can now continue with your selected flow.</p><p>— Team Student Flat Finder</p>`,
     })
 
+    // Generate JWT token
+    const token = generateToken(user.id, user.email)
+
     res.status(201).json({
       ...sanitizeUser(user),
+      token,
       emailNotification: !mailEnabled ? "email-disabled" : emailSent ? "welcome-email-sent" : "welcome-email-failed",
     })
   })
@@ -205,7 +225,16 @@ module.exports = function (app, ctx) {
       return
     }
 
-    if (user.password !== String(password)) {
+    // Compare password with bcrypt
+    let isPasswordValid
+    try {
+      isPasswordValid = await comparePassword(password, user.password)
+    } catch (error) {
+      res.status(500).json({ message: "Error validating password" })
+      return
+    }
+
+    if (!isPasswordValid) {
       res.status(401).json({ message: "Invalid password" })
       return
     }
@@ -227,6 +256,35 @@ module.exports = function (app, ctx) {
       }
     }
 
+    // Generate JWT token
+    const token = generateToken(user.id, user.email)
+
+    res.json({
+      ...sanitizeUser(user),
+      token,
+    })
+  })
+
+  // Verify JWT token and get current user
+  app.get("/api/auth/verify", authMiddleware, (req, res) => {
+    const user = state.users.get(req.user.userId)
+    if (!user) {
+      res.status(404).json({ message: "User not found" })
+      return
+    }
+    res.json({
+      ...sanitizeUser(user),
+      authenticated: true,
+    })
+  })
+
+  // Get current user from token
+  app.get("/api/auth/me", authMiddleware, (req, res) => {
+    const user = state.users.get(req.user.userId)
+    if (!user) {
+      res.status(404).json({ message: "User not found" })
+      return
+    }
     res.json(sanitizeUser(user))
   })
 
